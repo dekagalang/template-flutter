@@ -1,6 +1,6 @@
 image:
   file: .gitpod.Dockerfile
-tasks:
+# tasks:
   # - name: Android Appetize info
     # Gitpod is not able to run emulators within a worspace at this stage as
     # Google Kubernetes Engine does not support Nested Virtualization.
