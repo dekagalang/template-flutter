@@ -1,7 +1,16 @@
-FROM gitpod/workspace-full-vnc:2022-07-20-05-50-58
+FROM gitpod/workspace-full-vnc
 SHELL ["/bin/bash", "-c"]
+
+# Set JAVA_HOME
+ENV JAVA_HOME="$HOME/.sdkman/candidates/java/current"
+
+# Install java 17 via sdkman
+RUN source "$HOME/.sdkman/bin/sdkman-init.sh" \
+    && sdk install java 17.0.11.fx-zulu \
+    && sdk default java 17.0.11.fx-zulu
+
 ENV ANDROID_HOME=$HOME/androidsdk \
-    FLUTTER_VERSION=3.16.5-stable \
+    FLUTTER_VERSION=3.19.6-stable \
     QTWEBENGINE_DISABLE_SANDBOX=1
 ENV PATH="$HOME/flutter/bin:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
 
@@ -11,13 +20,6 @@ USER root
 RUN apt-get install -y wget
 RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
-
-RUN install-packages openjdk-11-jdk -y \
-        libgtk-3-dev \
-        libnss3-dev \
-        fonts-noto \
-        fonts-noto-cjk \
-    && update-java-alternatives --set java-1.11.0-openjdk-amd64 
 
 # Make some changes for our vnc client and flutter chrome
 # RUN sed -i 's|resize=scale|resize=remote|g' /opt/novnc/index.html \
