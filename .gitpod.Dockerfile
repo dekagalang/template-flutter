@@ -21,6 +21,11 @@ RUN apt-get install -y wget
 RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
 
+
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+&& unzip awscliv2.zip \
+&& ./aws/install
+
 # Make some changes for our vnc client and flutter chrome
 # RUN sed -i 's|resize=scale|resize=remote|g' /opt/novnc/index.html \
 #     && _gc_path="$(command -v google-chrome)" \
@@ -30,6 +35,7 @@ RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
 
 # Insall flutter and dependencies
 USER gitpod
+RUN npm uninstall -g pnpm && npm install -g pnpm@8.15.4
 RUN wget -q "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz" -O - \
     | tar xpJ -C "$HOME" \
     && _file_name="commandlinetools-linux-8092744_latest.zip" && wget "https://dl.google.com/android/repository/$_file_name" \
