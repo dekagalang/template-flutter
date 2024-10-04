@@ -35,6 +35,9 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 # Insall flutter and dependencies
 USER gitpod
 RUN npm uninstall -g pnpm && npm install -g pnpm@8.15.4
+RUN npm i -g @ionic/cli
+RUN npm i -g firebase-tools
+
 RUN wget -q "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz" -O - \
     | tar xpJ -C "$HOME" \
     && _file_name="commandlinetools-linux-8092744_latest.zip" && wget "https://dl.google.com/android/repository/$_file_name" \
