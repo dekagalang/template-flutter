@@ -93,3 +93,6 @@ vscode:
   extensions:
     - dart-code.flutter
     - dart-code.dart-code
+    - esbenp.prettier-vscode
+    - bradlc.vscode-tailwindcss
+    - GrapeCity.gc-excelviewer
